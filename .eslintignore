@@ -1,0 +1,7 @@
+# Dependency directories
+/build
+/node_modules
+/types
+.eslintrc.cjs
+vite.config.ts
+vitest.config.ts
