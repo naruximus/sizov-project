@@ -9,6 +9,7 @@ export function Navigation() {
           <NavLink href="/projects">projects</NavLink>
           <NavLink href="/about">about</NavLink>
           <NavLink href="/contact">contact</NavLink>
+          <NavLink href="/anime">anime</NavLink>
         </div>
       </div>
     </nav>
