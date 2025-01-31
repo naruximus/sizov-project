@@ -5,10 +5,20 @@ import { Play, Volume2, Pause, Volume, RotateCcw } from 'lucide-react';
 interface Props {
   src: string;
   type: string;
-  poster: string;
+  poster?: string;
+  showPlayPauseButton?: boolean;
+  showMuteButton?: boolean;
+  showRestartButton?: boolean;
 }
 
-export const VideoPlayer = ({ src, type, poster }: Props) => {
+export const VideoPlayer = ({
+  src,
+  type,
+  poster,
+  showPlayPauseButton = false,
+  showMuteButton = false,
+  showRestartButton = false,
+}: Props) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -23,7 +33,7 @@ export const VideoPlayer = ({ src, type, poster }: Props) => {
   };
   const handlePlayPauseToggle = () => {
     if (videoRef.current) {
-      if (isPlaying) {
+      if (!videoRef.current.paused) {
         videoRef.current.pause();
       } else {
         videoRef.current.play();
@@ -70,33 +80,39 @@ export const VideoPlayer = ({ src, type, poster }: Props) => {
   return (
     <div className="flex justify-center items-center relative">
       <div className="absolute bottom-4 right-4 flex gap-2 z-10">
-        {/* <button
-          onClick={handleRestartVideo}
-          disabled={!isLoaded}
-          className="disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <RotateCcw />
-        </button>
-        <button
-          onClick={handlePlayPauseToggle}
-          disabled={!isLoaded}
-          className="disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isPlaying ? <Play /> : <Pause />}
-        </button> */}
-        <button
-          onClick={handleMuteToggle}
-          disabled={!isLoaded}
-          className="disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isMuted ? <Volume /> : <Volume2 />}
-        </button>
+        {showPlayPauseButton && (
+          <button
+            onClick={handleRestartVideo}
+            disabled={!isLoaded}
+            className="disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            <RotateCcw />
+          </button>
+        )}
+        {showRestartButton && (
+          <button
+            onClick={handlePlayPauseToggle}
+            disabled={!isLoaded}
+            className="disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            {isPlaying ? <Play /> : <Pause />}
+          </button>
+        )}
+        {showMuteButton && (
+          <button
+            onClick={handleMuteToggle}
+            disabled={!isLoaded}
+            className="disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            {isMuted ? <Volume /> : <Volume2 />}
+          </button>
+        )}
       </div>
       <video
         height={500}
         className="w-full"
         ref={videoRef}
-        // poster={poster}
+        poster={poster}
         autoPlay={isPlaying}
         muted={isMuted}
         playsInline
