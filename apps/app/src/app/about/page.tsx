@@ -1,5 +1,5 @@
-import { PageView } from './_components/page-view';
+import { AboutView } from '@/views';
 
 export default function Page() {
-  return <PageView />;
+  return <AboutView />;
 }
