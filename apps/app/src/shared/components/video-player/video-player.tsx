@@ -69,8 +69,8 @@ export const VideoPlayer = ({ src, type, poster }: Props) => {
 
   return (
     <div className="flex justify-center items-center relative">
-      <div className="absolute top-12 left-4 flex gap-2 z-10">
-        <button
+      <div className="absolute bottom-4 right-4 flex gap-2 z-10">
+        {/* <button
           onClick={handleRestartVideo}
           disabled={!isLoaded}
           className="disabled:opacity-50 disabled:cursor-not-allowed"
@@ -83,7 +83,7 @@ export const VideoPlayer = ({ src, type, poster }: Props) => {
           className="disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isPlaying ? <Play /> : <Pause />}
-        </button>
+        </button> */}
         <button
           onClick={handleMuteToggle}
           disabled={!isLoaded}
@@ -93,12 +93,14 @@ export const VideoPlayer = ({ src, type, poster }: Props) => {
         </button>
       </div>
       <video
+        height={500}
         className="w-full"
         ref={videoRef}
         // poster={poster}
         autoPlay={isPlaying}
         muted={isMuted}
         playsInline
+        loop
       >
         <source src={src} type={type} />
         Ваш браузер не поддерживает видео.
