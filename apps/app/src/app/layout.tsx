@@ -1,4 +1,4 @@
-import { Navigation, Footer } from '@/shared';
+import { Navigation, Footer } from '@/shared/components';
 import './global.css';
 
 export const metadata = {
